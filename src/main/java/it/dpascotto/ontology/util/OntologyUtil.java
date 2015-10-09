@@ -7,11 +7,14 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.semanticweb.owlapi.util.ShortFormProvider;
+import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 
 public class OntologyUtil {
 
 	static Logger log = Logger.getLogger(OntologyUtil.class);
 	static final int INDENT_SIZE = 4;
+	static ShortFormProvider shortFormProvider = new SimpleShortFormProvider();
 	
 	public static void printOntology(OWLOntology ontology) {
 		OWLClass clazz = ontology.getOWLOntologyManager().getOWLDataFactory().getOWLThing();
@@ -33,7 +36,7 @@ public class OntologyUtil {
 			for (int i = 0; i < level * INDENT_SIZE; i++) {
 				indent += " ";
 			}
-			log.debug(indent + owlClassToString(clazz));
+			log.debug(indent + shortFormProvider.getShortForm(clazz));
 			
 			for (OWLClass child : reasoner.getSubClasses(clazz, true).getFlattened()) {
 				if (!child.equals(clazz)) {

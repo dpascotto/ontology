@@ -23,6 +23,7 @@ public class TestOntologyMgr {
 			
 			org.junit.Assert.assertNotNull(ontology);
 			
+			OntologyUtil.printOntology(ontology);
 			System.out.println("Test OK");
 		} catch (Exception e) {
 			e.printStackTrace();
